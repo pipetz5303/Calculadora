@@ -1,7 +1,7 @@
 *{margin: 0;}
 
 body {
-    height: 100vh;
+    height: 98vh;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-image: linear-gradient(to bottom right,#515153, #1d1d1d );
     background-size: cover;
@@ -51,6 +51,7 @@ body {
     
     margin:1.2em 0.5em 0.5em 0.5em;
     background-color: #D9E09F;
+    background-color:#e0e710;
     color:black;
     flex-direction: row-reverse;
     display: flex;
@@ -95,6 +96,10 @@ body {
     align-items: center;
     justify-content: center;
     margin-top: 0.4em;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
 }
 
 
