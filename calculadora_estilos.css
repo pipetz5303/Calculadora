@@ -53,7 +53,7 @@ body {
     background-color: #D9E09F;
     background-color:#e0e710;
     color:black;
-    flex-direction: row-reverse;
+    flex-direction: column;
     display: flex;
     align-items: flex-end;
     justify-items: flex-end;
@@ -66,8 +66,13 @@ body {
 }
 
 #resultado{
-    padding: 0.5em;
+    padding: 0.2em 0.5em 0.2em 0.5em;
     font-size: 1.5em;
+}
+
+#historico{
+    padding: 0.5em 0.7em 0.5em ;
+    color:#4d4d4d;
 }
 
 .boton-forma{
@@ -84,6 +89,11 @@ body {
 
 
 
+.boton-forma:hover{
+    background-color: #e0e710;
+    color: black;
+    font-weight: bold;
+}
 
 
 
@@ -103,8 +113,3 @@ body {
 }
 
 
-
-.boton-forma:hover{
-    background-color: #e0e710;
-   color: black;
-}
