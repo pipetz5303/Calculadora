@@ -78,7 +78,7 @@ function init(){
     //ac borra todo y lo limpia
     btn_ac.onclick = function(e){
         limpiar();
-        operador = NaN;
+        operador = 1;
     }
     //borrar quita el ultimo digitado
     btn_borrar.onclick= function(e){
@@ -136,7 +136,10 @@ function init(){
 
     btn_igual.onclick= function(e){
         //pasar la operacion completa a arriba
-        if(isNaN(operador)){
+        if(operador ===1){
+            operacion.innerHTML= pantalla.innerHTML;
+        }else if(isNaN(operador)){
+            console.log(operador);
             primerNumero = operacion.innerHTML.slice(0,operacion.innerHTML.length-2);
             segundoNumero = pantalla.innerHTML;
             let resultado = calcular(primerNumero, segundoNumero, operador);
