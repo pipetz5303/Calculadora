@@ -1,8 +1,8 @@
 //atributos
 let primerNumero;
 let segundoNumero;
-let operador;
-let total=0;
+let operador= " ";
+let total = 0;
 
 const operacion = document.getElementById("historico");
 const pantalla = document.getElementById("resultado");
@@ -23,16 +23,13 @@ function init(){
     const btn_0 = document.getElementById("btn_0");
     const btn_ac = document.getElementById("btn_ac");
     const btn_negativo = document.getElementById("btn_negativo");
-    const btn_porcentaje = document.getElementById("btn_porcentaje");
+    const btn_borrar = document.getElementById("btn_borrar");
     const btn_division = document.getElementById("btn_division");
     const btn_multiplicar = document.getElementById("btn_multiplicacion");
     const btn_restar = document.getElementById("btn_resta");
     const btn_sumar = document.getElementById("btn_suma");
     const btn_punto = document.getElementById("btn_punto");
     const btn_igual = document.getElementById("btn_igual");
-
-
-
 
     // operador ternario para ver si esta en pantalla inciial
     btn_1.onclick = function(e){
@@ -74,19 +71,31 @@ function init(){
     btn_0.onclick = function(e){
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "0": pantalla.textContent += "0";
     }
-
+    //si ya tiene punto lo omite.
     btn_punto.onclick = function(e){
         pantalla.textContent = !pantalla.textContent.includes(".") ? pantalla.textContent += "." : pantalla.textContent;
     }
-
+    //ac borra todo y lo limpia
     btn_ac.onclick = function(e){
         limpiar();
+        operador = NaN;
+    }
+    //borrar quita el ultimo digitado
+    btn_borrar.onclick= function(e){
+        let numeroIngresado = pantalla.textContent;
+        if(numeroIngresado !=0){
+            pantalla.textContent = numeroIngresado.slice(0, numeroIngresado.length-1);
+            if(pantalla.textContent== ""){
+                pantalla.textContent = "0";
+            }
+        }
+        
     }
 
     btn_negativo.onclick = function(e){
         //si no tiene se le agrega - y sino quitamos el - 
         if(pantalla.innerHTML==="0"){
-            //si es 0 no hace nada
+            alert("no puedes pasar 0 a negativo");
         }else if(!pantalla.innerHTML.startsWith("-")){
             pantalla.innerHTML = `-${pantalla.innerHTML}`;
         }else{
@@ -96,89 +105,120 @@ function init(){
 
     btn_sumar.onclick = function(e){
         primerNumero = pantalla.innerHTML;
+        revisarResultado(operador);
         operador = "+";
-        operacion.innerHTML = `${primerNumero} ${operador}`;
-        pantalla.innerHTML = "0";
+        
+        validarOperador(primerNumero, operador);
     }
 
     btn_restar.onclick = function(e){
         primerNumero = pantalla.innerHTML;
+        revisarResultado(operador);
         operador = "-";
-        operacion.innerHTML = `${primerNumero} ${operador}`;
-        pantalla.innerHTML = "0";
+        validarOperador(primerNumero, operador);
+
     }
 
     btn_multiplicar.onclick = function(e){
         primerNumero = pantalla.innerHTML;
+        revisarResultado(operador);
         operador = "*";
-        operacion.innerHTML = `${primerNumero} ${operador}`;
-        pantalla.innerHTML = "0";
+        //valida el numero porque a veces solo queremos cambiar el operador
+        validarOperador(primerNumero, operador);
     }
 
     btn_division.onclick = function(e){
         primerNumero = pantalla.innerHTML;
+        revisarResultado(operador);
         operador = "/";
-        operacion.innerHTML = `${primerNumero} ${operador}`;
-        pantalla.innerHTML = "0";
+        validarOperador(primerNumero, operador);
+    }
+
+    btn_igual.onclick= function(e){
+        //pasar la operacion completa a arriba
+        if(isNaN(operador)){
+            primerNumero = operacion.innerHTML.slice(0,operacion.innerHTML.length-2);
+            segundoNumero = pantalla.innerHTML;
+            let resultado = calcular(primerNumero, segundoNumero, operador);
+            //dejar resultado
+            operacion.innerHTML += ` ${segundoNumero}`;
+            pantalla.innerHTML = resultado;
+            operador = 1;
+        }
     }
 }
 
+function revisarResultado(op){
+    if(operador === 1){
+        operacion.innerHTML = `${pantalla.innerHTML}  `;
+        pantalla.innerHTML = "0";
+    }
 
+}
 
 function limpiar(){
     operacion.innerHTML="0";
     pantalla.innerHTML = "0";
 }
 
-
-let a , b = 2;
-
-
-
-
-/*todo: 
-    FALTA poner las funciones de operaciones, porcentaje, igual
-    cambiar pantalla de operaciones
-
-
-*/
-const sumar =(f,g)=> f+g;
-
-const restar = (a,b) => a-b;
-
-const multiplicar = (a,b) => a*b;
-
-const dividir = (a,b)=> a/b;
-
-var opcion=4;
-
-
-switch(opcion){
-    case 1: 
-        total = sumar(a,b);
-        console.log(total);
-        break;
-    case 2: 
-        total = restar(a,b);
-        console.log(total);
-        break;
-    
-    case 3: 
-        total = multiplicar(a,b);
-        console.log(total);
-        break;
-    case 4: 
-        if(b != 0){
-            total = dividir(a,b);
-            console.log(total);
-        }else{
-            console.log("no se divide entre 0");
-        }
-        break;
-
-    default:
-        console.log("no valido");
-        break;
+function cambiarOperador(texto, operador){
+    let textoAux = texto.slice(0, texto.length-1);
+    textoAux += operador;
+    return textoAux;
 }
+
+//revisa y compara el operador, para hacer cambio de operador sin perder el numero 1
+function validarOperador(primerNumero, signoOperacion){
+    if(operacion.innerText === "0"){
+        operacion.innerHTML = `${primerNumero} ${signoOperacion}`;
+        pantalla.innerHTML = "0";
+    }else{
+        operacion.innerHTML = cambiarOperador(operacion.innerHTML, signoOperacion);
+    }
+    
+
+
+}
+
+function calcular(a,b, operadorF){
+    const sumar =(a,b)=> Number(a)+ Number(b);
+
+    const restar = (a,b) => Number(a)-Number(b);
+
+    const multiplicar = (a,b) => Number(a)*Number(b);
+
+    const dividir = (a,b)=> Number(a)/Number(b);
+
+    var opcion=operadorF;
+
+    switch(opcion){
+        case "+": 
+            total = sumar(a,b);
+            break;
+        case "-": 
+            total = restar(a,b);
+            break;
+        
+        case "*": 
+            total = multiplicar(a,b);
+            break;
+        case "/": 
+            if(b != 0){
+                total = dividir(a,b);
+            }else{
+                alert("no se divide entre 0");
+                total = "Error. 0 Indefinido";
+            }
+            break;
+
+        default:
+            
+            total =0;
+            break;
+    }
+
+    return total;
+}
+
 
 

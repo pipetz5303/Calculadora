@@ -48,7 +48,8 @@ body {
 
 #pantalla-resultado{
     height: 5em;
-    
+    width: 21em;
+    max-width:  20.5em;
     margin:1.2em 0.5em 0.5em 0.5em;
     background-color: #D9E09F;
     background-color:#e0e710;
@@ -75,6 +76,14 @@ body {
     color:#4d4d4d;
 }
 
+#botones{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 0.9em;
+}
+
+
+
 .boton-forma{
     color: #fff;
     height: 3em;
@@ -95,7 +104,11 @@ body {
     font-weight: bold;
 }
 
-
+#btn_igual{
+    grid-column: 3/5;
+    grid-row: 5/6;
+    width: auto;
+}
 
 #footer{
     height:3em;
