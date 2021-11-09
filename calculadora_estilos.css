@@ -80,6 +80,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin-bottom: 0.9em;
+    text-align: center;
 }
 
 
