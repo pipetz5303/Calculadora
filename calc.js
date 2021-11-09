@@ -93,7 +93,7 @@ function init(){
     //borrar quita el ultimo digitado
     btn_borrar.onclick= function(e){
         let numeroIngresado = pantalla.textContent;
-        if(numeroIngresado !=0){
+        if(numeroIngresado !=0 || numeroIngresado.includes(".")){
             pantalla.textContent = numeroIngresado.slice(0, numeroIngresado.length-1);
             if(pantalla.textContent== ""){
                 pantalla.textContent = "0";
