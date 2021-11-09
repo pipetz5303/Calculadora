@@ -33,42 +33,52 @@ function init(){
 
     // operador ternario para ver si esta en pantalla inciial
     btn_1.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "1": pantalla.textContent += "1";
     }
 
     btn_2.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "2": pantalla.textContent += "2";
     }
 
     btn_3.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "3": pantalla.textContent += "3";
     }
 
     btn_4.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "4": pantalla.textContent += "4";
     }
 
     btn_5.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "5": pantalla.textContent += "5";
     }
 
     btn_6.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "6": pantalla.textContent += "6";
     }
 
     btn_7.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "7": pantalla.textContent += "7";
     }
 
     btn_8.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "8": pantalla.textContent += "8";
     }
 
     btn_9.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "9": pantalla.textContent += "9";
     }
 
     btn_0.onclick = function(e){
+        revisarResultado2(pantalla.innerHTML);
         pantalla.textContent = pantalla.textContent == "0" ? pantalla.textContent = "0": pantalla.textContent += "0";
     }
     //si ya tiene punto lo omite.
@@ -151,6 +161,17 @@ function init(){
     }
 }
 
+//antes de agregar un numero revisa que no hayan operacion para que la sobreescirba
+function revisarResultado2(resultadoAnterior){
+    let tieneOperador = isNaN(operacion.innerHTML);
+    console.log(operador);
+    if (tieneOperador && operador=== 1){
+        operacion.innerHTML = resultadoAnterior;
+        pantalla.textContent = 0;
+    }
+}
+
+
 function revisarResultado(op){
     if(operador === 1){
         operacion.innerHTML = `${pantalla.innerHTML}  `;
@@ -183,14 +204,15 @@ function validarOperador(primerNumero, signoOperacion){
 
 }
 
+//codigo que se puede poner a una linea pero se hacen funciones flecha
 function calcular(a,b, operadorF){
     const sumar =(a,b)=> Number(a)+ Number(b);
 
-    const restar = (a,b) => Number(a)-Number(b);
+    const restar = (a,b) => a- b;
 
-    const multiplicar = (a,b) => Number(a)*Number(b);
+    const multiplicar = (a,b) => a* b;
 
-    const dividir = (a,b)=> Number(a)/Number(b);
+    const dividir = (a,b)=> a/ b;
 
     var opcion=operadorF;
 
